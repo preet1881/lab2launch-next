@@ -77,27 +77,19 @@ export default function Navbar() {
                   onMouseEnter={() => setOpenMenu(category)}
                   onMouseLeave={() => setOpenMenu(null)}
                 >
-                  {Array.isArray((content as any)[0]?.items)
-                    ? (content as any).map((group: any, i: number) => (
+                  {Array.isArray((content[0] as any)?.items)
+                    ? (content as any[]).map((group, i) => (
                         <div key={group.category} className={`px-4 ${i === 0 ? '' : 'border-l border-gray-100'}`}>
                           <h4 className="font-semibold text-gray-600 text-xs uppercase mb-2">{group.category}</h4>
                           {group.items.map(({ label, href, icon: Icon }: any) => (
-                            <Link
-                              key={href}
-                              href={href}
-                              className="flex items-center gap-2 py-1 text-sm text-gray-700 hover:text-orange-500"
-                            >
+                            <Link key={href} href={href} className="flex items-center gap-2 py-1 text-sm text-gray-700 hover:text-orange-500">
                               {Icon && <Icon size={16} className="text-orange-500" />} {label}
                             </Link>
                           ))}
                         </div>
                       ))
-                    : content.map(({ label, href }: any) => (
-                        <Link
-                          key={href}
-                          href={href}
-                          className="block text-sm text-gray-700 hover:text-orange-500"
-                        >
+                    : (content as any[]).map(({ label, href }) => (
+                        <Link key={href} href={href} className="block text-sm text-gray-700 hover:text-orange-500">
                           {label}
                         </Link>
                       ))}
